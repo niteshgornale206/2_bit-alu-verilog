@@ -1,0 +1,28 @@
+module alu_2bit (
+    input [1:0] A,
+    input [1:0] B,
+    input [2:0] sel,
+    output reg [1:0] result,
+    output reg carry
+);
+
+always @(*) begin
+    carry = 0;
+
+    case(sel)
+
+        3'b000: {carry, result} = A + B;
+        3'b001: {carry, result} = A - B;
+        3'b010: result = A & B;
+        3'b011: result = A | B;
+        3'b100: result = A ^ B;
+
+        default: begin
+            result = 2'b00;
+            carry = 0;
+        end
+
+    endcase
+end
+
+endmodule
